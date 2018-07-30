@@ -1,0 +1,25 @@
+mkdir -p x64/debug/bin/shared/
+mkdir -p x64/debug/bin/static/
+mkdir -p x64/debug/lib/shared/
+mkdir -p x64/debug/lib/static/
+mkdir -p x64/debug/obj/shared/
+mkdir -p x64/debug/obj/static/
+mkdir -p x64/release/bin/shared/
+mkdir -p x64/release/bin/static/
+mkdir -p x64/release/lib/shared/
+mkdir -p x64/release/lib/static/
+mkdir -p x64/release/obj/shared/
+mkdir -p x64/release/obj/static/
+
+mkdir -p x86/debug/bin/shared/
+mkdir -p x86/debug/bin/static/
+mkdir -p x86/debug/lib/shared/
+mkdir -p x86/debug/lib/static/
+mkdir -p x86/debug/obj/shared/
+mkdir -p x86/debug/obj/static/
+mkdir -p x86/release/bin/shared/
+mkdir -p x86/release/bin/static/
+mkdir -p x86/release/lib/shared/
+mkdir -p x86/release/lib/static/
+mkdir -p x86/release/obj/shared/
+mkdir -p x86/release/obj/static/
