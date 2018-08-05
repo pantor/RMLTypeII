@@ -12,9 +12,9 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 set(CMAKE_CXX_STANDARD 11)
 
 
-file(GLOB ReflexxesTypeII_SRC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "src/TypeIIRML/*.cpp")
+file(GLOB ReflexxesTypeII_SRC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "src/*.cpp")
 add_library(ReflexxesTypeII SHARED ${ReflexxesTypeII_SRC})
-target_include_directories(ReflexxesTypeII PUBLIC include)
+target_include_directories(ReflexxesTypeII PUBLIC include/RMLTypeII)
 
 
 if(BUILD_EXAMPLES)
