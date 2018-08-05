@@ -3,7 +3,7 @@
 import pylab
 
 
-data = pylab.loadtxt('build/output.txt', delimiter=',')
+data = pylab.loadtxt('../build/output.txt', delimiter=',')
 
 pylab.plot(data[:, 0], label='x')
 pylab.plot(data[:, 1], label='v')
