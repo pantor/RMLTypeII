@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10.0)
 
 
-project(RMLTypeII VERSION 0.1.0 LANGUAGES CXX)
+project(RMLTypeII VERSION 1.2.6 LANGUAGES CXX)
 
 
 option(BUILD_EXAMPLES "Build example programs" ON)
