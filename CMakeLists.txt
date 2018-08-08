@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10.0)
+cmake_minimum_required(VERSION 3.6.0)
 
 
 project(RMLTypeII VERSION 1.2.7 LANGUAGES CXX)
