@@ -39,4 +39,7 @@ endif()
 if(BUILD_TESTS)
   add_executable(trajectory-csv test/trajectory-csv.cpp)
   target_link_libraries(trajectory-csv ReflexxesTypeII)
+
+  add_executable(generator-csv test/generator-csv.cpp)
+  target_link_libraries(generator-csv ReflexxesTypeII)
 endif()
