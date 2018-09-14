@@ -2,14 +2,19 @@
 
 import pylab
 
+def plotCSV(file):
+    data = pylab.loadtxt(file, delimiter=',')
 
-data = pylab.loadtxt('../build/output.txt', delimiter=',')
+    dof = int( (len(data[0]) - 1) / 2 )
 
-pylab.plot(data[:, 0], label='x')
-pylab.plot(data[:, 1], label='v')
-pylab.plot(data[:, 2], label='a')
+    for i in range(dof):
+        pylab.plot(data[:, -1], data[:, i], label='x_{}'.format(i))
+        pylab.plot(data[:, -1], data[:, dof + i], label='v_{}'.format(i))
 
-pylab.legend()
-pylab.grid(True, which="both", ls="-")
-pylab.xlabel("Time step t")
-pylab.show()
+    pylab.legend()
+    pylab.grid(True, which="both", ls="-")
+    pylab.xlabel("Time t [s]")
+    pylab.show()
+
+if __name__ == "__main__":
+    plotCSV('../build/output.csv')
