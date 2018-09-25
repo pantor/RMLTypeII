@@ -25,6 +25,7 @@ struct MotionData {
 
   double x_new;
   double v_new;
+  double a_new;
 };
 
 
@@ -63,6 +64,7 @@ std::vector<MotionData> generateMotion(double x_0, double v_0, double a_max, dou
     motion_data.v_target = v_target;
     motion_data.x_new = OP->NewPositionVector->VecData[0];
     motion_data.v_new = OP->NewVelocityVector->VecData[0];
+    motion_data.a_new = OP->NewAccelerationVector->VecData[0];
     result.push_back(motion_data);
 
     *IP->CurrentPositionVector = *OP->NewPositionVector;
@@ -73,38 +75,52 @@ std::vector<MotionData> generateMotion(double x_0, double v_0, double a_max, dou
   return result;
 }
 
-void printMotionData(const std::vector<MotionData>& motion_data) {
-  std::ofstream outputFile("output.csv");
+void printMotionData(const std::string& filename, const std::vector<MotionData>& motion_data) {
+  std::ofstream outputFile(filename);
 
-  outputFile << "x,v,a,a_max,x_target,v_target,x_new,v_new" << std::endl;
+  // outputFile << "x,v,a,a_max,x_target,v_target,x_new,v_new" << std::endl;
   for (auto d: motion_data) {
-    outputFile << d.x << ","
+    outputFile
+      << d.x << ","
       << d.v << ","
       << d.a << ","
       << d.a_max << ","
       << d.x_target << ","
       << d.v_target << ","
       << d.x_new << ","
-      << d.v_new << std::endl;
+      << d.v_new << ","
+      << d.a_new << std::endl;
   }
 }
 
 int main() {
+  const int train_count = 300;
+  const int test_count = 60;
+  const std::string file_id = "x1-v1-xt1-vt1-2";
+
   std::random_device rd;
   std::mt19937 gen(rd());
 
-  std::normal_distribution<double> x_0_dist(0.0, 2.0);
-  std::normal_distribution<double> v_0_dist(0.0, 0.0);
-  std::gamma_distribution<double> a_max_dist(2.0, 2.0);
-  std::normal_distribution<double> x_target_dist(5.0, 0.1);
-  std::normal_distribution<double> v_target_dist(0.0, 0.0);
+  std::normal_distribution<double> x_0_dist(0.0, 1.0);
+  std::normal_distribution<double> v_0_dist(0.0, 1.0);
+  std::gamma_distribution<double> a_max_dist(1.0, 1.0);
+  std::normal_distribution<double> x_target_dist(0.0, 1.0);
+  std::normal_distribution<double> v_target_dist(0.0, 1.0);
 
-  std::vector<MotionData> result {};
+  std::vector<MotionData> train_result {};
+  std::vector<MotionData> test_result {};
 
-  for (int i = 0; i < 100; i++) {
+  // Train data
+  for (int i = 0; i < train_count; i++) {
     auto motion_data = generateMotion(x_0_dist(gen), v_0_dist(gen), a_max_dist(gen), x_target_dist(gen), v_target_dist(gen));
-    result.insert(result.end(), motion_data.begin(), motion_data.end());
+    train_result.insert(train_result.end(), motion_data.begin(), motion_data.end());
   }
+  printMotionData("train-" + file_id + ".csv", train_result);
 
-  printMotionData(result);
+  // Test data
+  for (int i = 0; i < test_count; i++) {
+    auto motion_data = generateMotion(x_0_dist(gen), v_0_dist(gen), a_max_dist(gen), x_target_dist(gen), v_target_dist(gen));
+    test_result.insert(test_result.end(), motion_data.begin(), motion_data.end());
+  }
+  printMotionData("test-" + file_id + ".csv", test_result);
 }
