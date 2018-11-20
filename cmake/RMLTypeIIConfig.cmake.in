@@ -1,0 +1,8 @@
+get_filename_component(RMLTypeII_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
+if(NOT TARGET RMLTypeII::ReflexxesTypeII)
+  include("${RMLTypeII_CMAKE_DIR}/RMLTypeIITargets.cmake")
+endif()
